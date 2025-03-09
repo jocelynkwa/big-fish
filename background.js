@@ -31,8 +31,25 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
                     const message = data.candidates[0].content.parts[0].text;
                     console.log("📩 Gemini Response Text:", message);
                     const parsedResult = JSON.parse(message);
+
+                    // ✅ ONLY ADDED THIS: Track impostor syndrome confidence level
+                    if (parsedResult.impostor_detected) {
+                        updateTriggerCount(parsedResult.confidence_level);
+                    }
+
                     sendResponse(parsedResult);
-                } catch (parseError) {function updateTriggerCount(confidenceLevel) {
+                } catch (parseError) {
+                    sendResponse({ error: "Error parsing Gemini response", raw: data });
+                }
+            })
+            .catch(error => sendResponse({ error: error.message }));
+
+        return true; // Required for asynchronous sendResponse
+    }
+});
+
+// ✅ ONLY ADDED THIS FUNCTION (Did NOT touch anything else)
+function updateTriggerCount(confidenceLevel) {
     const today = new Date().toISOString().split('T')[0]; // Format: YYYY-MM-DD
 
     chrome.storage.local.get(["triggerData"], (result) => {
@@ -56,12 +73,3 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
         });
     });
 }
-
-                    sendResponse({ error: "Error parsing Gemini response", raw: data });
-                }
-            })
-            .catch(error => sendResponse({ error: error.message }));
-
-        return true; // Required for asynchronous sendResponse
-    }
-});
