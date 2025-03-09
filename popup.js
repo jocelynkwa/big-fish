@@ -28,9 +28,15 @@ function generateGraph(data) {
 }
 
 function getCommitColor(avgConfidence) {
-    if (avgConfidence >= 10) return "#196127"; // Dark green (confident)
-    if (avgConfidence >= 7) return "#239a3b"; // Medium green
-    if (avgConfidence >= 4) return "#7bc96f"; // Light green
-    if (avgConfidence >= 1) return "#c6e48b"; // Yellow (moderate impostor syndrome)
-    return "#ebedf0"; // Grey (no triggers)
+    if (avgConfidence >= 10) return "#196127"; // Dark Green (Confident)
+    if (avgConfidence >= 9) return "#1f7a38";  // Slightly lighter green
+    if (avgConfidence >= 8) return "#2da84a";  // Medium green
+    if (avgConfidence >= 7) return "#57c46a";  // Light green
+    if (avgConfidence >= 6) return "#8ddf8d";  // Yellow-green
+    if (avgConfidence >= 5) return "#ffd700";  // Yellow (Balanced)
+    if (avgConfidence >= 4) return "#ffa500";  // Darker orange
+    if (avgConfidence >= 3) return "#ff8c00";  // Orange (Moderate impostor syndrome)
+    if (avgConfidence >= 2) return "#ff6347";  // Red-orange
+    if (avgConfidence >= 1) return "#d73a49";  // Red (Severe impostor syndrome)
+    return "#ebedf0"; // Grey (No data)
 }
