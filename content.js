@@ -59,28 +59,40 @@ function showPopup(responseX, responseY) {
     popup.id = "impostor-popup";
     popup.style.position = "fixed";
     popup.style.bottom = "50px";
-    popup.style.right = "50px"; // Move to the left side
-    popup.style.width = "300px";
-    popup.style.height = "200px"; // Adjust height as needed
+    popup.style.right = "50px";
+    popup.style.width = "250px";  // Keeps the popup compact
+    popup.style.height = "350px"; // Proper vertical fit
     popup.style.backgroundColor = "white";
-    popup.style.border = "2px solid black";
-    popup.style.borderRadius = "10px";
-    popup.style.boxShadow = "2px 2px 10px rgba(0, 0, 0, 0.2)";
-    popup.style.padding = "10px";
-    popup.style.fontFamily = "Arial, sans-serif";
+    popup.style.border = "none"; // No black border
+    popup.style.borderRadius = "20px"; // Softer, rounded edges
+    popup.style.boxShadow = "4px 4px 12px rgba(0, 0, 0, 0.1)"; // Soft shadow for depth
+    popup.style.padding = "20px";
+    popup.style.fontFamily = "'Poppins', 'Quicksand', sans-serif"; // Cuter and modern font
     popup.style.zIndex = "10000";
 
     // Apply the background image
     popup.style.backgroundImage = `url(${chrome.runtime.getURL("popup_bg.png")})`;
-    popup.style.backgroundSize = "cover";
+    popup.style.backgroundSize = "contain"; 
     popup.style.backgroundPosition = "center";
     popup.style.backgroundRepeat = "no-repeat";
+    popup.style.display = "flex";
+    popup.style.flexDirection = "column";
+    popup.style.justifyContent = "center";
+    popup.style.alignItems = "center";
+    popup.style.textAlign = "center";
+
+    // Container for text and images
+    const contentContainer = document.createElement("div");
+    contentContainer.style.width = "90%";
+    contentContainer.style.display = "flex";
+    contentContainer.style.flexDirection = "column";
+    contentContainer.style.alignItems = "center";
 
     // X's supportive response
     const xContainer = document.createElement("div");
     xContainer.style.display = "flex";
     xContainer.style.alignItems = "center";
-    xContainer.style.marginBottom = "10px";
+    xContainer.style.marginBottom = "15px";
 
     const xImg = document.createElement("img");
     xImg.src = chrome.runtime.getURL("x_character.png");
@@ -90,6 +102,10 @@ function showPopup(responseX, responseY) {
 
     const xText = document.createElement("p");
     xText.innerText = responseX;
+    xText.style.color = "#0077cc";
+    xText.style.fontWeight = "bold";
+    xText.style.fontSize = "14px";
+    xText.style.margin = "0";
 
     xContainer.appendChild(xImg);
     xContainer.appendChild(xText);
@@ -107,13 +123,18 @@ function showPopup(responseX, responseY) {
 
     const yText = document.createElement("p");
     yText.innerText = responseY;
+    yText.style.color = "#cc3366";
+    yText.style.fontWeight = "bold";
+    yText.style.fontSize = "14px";
+    yText.style.margin = "0";
 
     yContainer.appendChild(yImg);
     yContainer.appendChild(yText);
 
-    // Append everything to popup
-    popup.appendChild(xContainer);
-    popup.appendChild(yContainer);
+    // Append everything
+    contentContainer.appendChild(xContainer);
+    contentContainer.appendChild(yContainer);
+    popup.appendChild(contentContainer);
     document.body.appendChild(popup);
 
     // Remove popup after 10 seconds
@@ -121,5 +142,3 @@ function showPopup(responseX, responseY) {
         popup.remove();
     }, 10000);
 }
-
-
