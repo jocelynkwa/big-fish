@@ -12,7 +12,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
                         text: `Analyze the following email draft for signs of impostor syndrome. 
                                        If found, respond with {"impostor_detected": true, "confidence_level": 3, 
                                        "response_x": "Supportive response here", "response_y": "Sassy response here"}. 
-                                       If no impostor syndrome is found, respond with {"impostor_detected": false}.
+                                       If no impostor syndrome is found, respond with {"impostor_detected": false, "confidence_level": 10}.
                                        Email draft: "${request.text}"`
                     }]
                 }]
@@ -35,6 +35,8 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
                     // ✅ ONLY ADDED THIS: Track impostor syndrome confidence level
                     if (parsedResult.impostor_detected) {
                         updateTriggerCount(parsedResult.confidence_level);
+                    } else { 
+                        updateTriggerCount(10); 
                     }
 
                     sendResponse(parsedResult);
