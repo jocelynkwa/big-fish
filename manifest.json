@@ -4,7 +4,7 @@
     "version": "1.0",
     "description": "Detects impostor syndrome phrases in Gmail and provides encouragement.",
     
-    "permissions": ["storage", "activeTab"], 
+    "permissions": ["storage", "activeTab", "tabs"], 
     "host_permissions": [
         "https://mail.google.com/", 
         "https://generativelanguage.googleapis.com/"
@@ -15,8 +15,15 @@
     },
 
     "action": {
-        "default_popup": "popup.html",
         "default_icon": "icon.png"
+    },
+
+    "commands": {
+        "_execute_action": {
+            "suggested_key": {
+                "default": "Ctrl+Shift+Y"
+            }
+        }
     },
 
     "content_scripts": [
@@ -28,7 +35,7 @@
 
     "web_accessible_resources": [
      {
-         "resources": ["x_character.png", "y_character.png", "popup_bg.png"],
+         "resources": ["x_character.png", "y_character.png", "popup_bg.png", "graph_bg.png"],
          "matches": ["<all_urls>"]
      }
  ]

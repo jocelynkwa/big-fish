@@ -32,7 +32,6 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
                     console.log("📩 Gemini Response Text:", message);
                     const parsedResult = JSON.parse(message);
 
-                    // ✅ ONLY ADDED THIS: Track impostor syndrome confidence level
                     if (parsedResult.impostor_detected) {
                         updateTriggerCount(parsedResult.confidence_level);
                     } else { 
@@ -50,28 +49,34 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     }
 });
 
-// ✅ ONLY ADDED THIS FUNCTION (Did NOT touch anything else)
 function updateTriggerCount(confidenceLevel) {
-    const today = new Date().toISOString().split('T')[0]; // Format: YYYY-MM-DD
+    const today = new Date().toISOString().split('T')[0]; 
 
     chrome.storage.local.get(["triggerData"], (result) => {
-        let triggerData = result.triggerData || {}; // If no data exists, create an empty object
+        let triggerData = result.triggerData || {}; 
 
-        // Initialize today's entry if it doesn't exist
         if (!triggerData[today]) {
             triggerData[today] = { totalConfidence: 0, count: 0, averageConfidence: 0 }; 
         }
 
-        // Add confidence level and increment count
         triggerData[today].totalConfidence += confidenceLevel;
         triggerData[today].count += 1;
-
-        // Compute the average confidence level for today
         triggerData[today].averageConfidence = triggerData[today].totalConfidence / triggerData[today].count;
 
-        // Store updated data
         chrome.storage.local.set({ triggerData }, () => {
             console.log("📊 Updated trigger data:", triggerData);
         });
     });
 }
+
+// Open popup.html in a larger window
+chrome.action.onClicked.addListener(() => {
+    chrome.windows.create({
+        url: chrome.runtime.getURL("popup.html"),
+        type: "popup",
+        width: 450,
+        height: 700,
+        left: 200,
+        top: 100
+    });
+});

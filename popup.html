@@ -6,19 +6,33 @@
     <title>Impostor Syndrome Tracker</title>
     <script src="popup.js" defer></script>
     <style>
-        body {
+        /* Make the popup UI full-screen height */
+        html, body {
+            margin: 0;
+            padding: 0;
+            height: 100vh; /* Full screen height */
+            width: 100vw; /* Full screen width */
+            overflow: hidden; /* Prevents scrollbars */
+            background-image: url("graph_bg.png");
+            background-size: cover; /* Cover entire popup */
+            background-position: center;
+            background-repeat: no-repeat;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
             font-family: Arial, sans-serif;
             text-align: center;
-            width: 350px;
-            padding: 10px;
         }
+
         #commit-graph {
             display: grid;
             grid-template-columns: repeat(30, 10px);
             gap: 2px;
             justify-content: center;
-            margin-top: 10px;
+            margin-top: 20px;
         }
+
         .day {
             width: 10px;
             height: 10px;
@@ -28,8 +42,7 @@
     </style>
 </head>
 <body>
-    <h2>Impostor Syndrome Tracker</h2>
-    <p>Each box represents a day. More green = more confidence!</p>
+    <padding> 
     <div id="commit-graph"></div>
 </body>
 </html>

@@ -1,4 +1,16 @@
 document.addEventListener("DOMContentLoaded", function () {
+    // Resize the popup dynamically
+    chrome.runtime.getPlatformInfo(function (info) {
+        if (info.os === "mac") {
+            document.body.style.width = "400px";
+            document.body.style.height = "600px";
+        } else {
+            document.body.style.width = "450px";
+            document.body.style.height = "650px";
+        }
+    });
+
+    // Load the stored data
     chrome.storage.local.get(["triggerData"], (result) => {
         let triggerData = result.triggerData || {};
         generateGraph(triggerData);
