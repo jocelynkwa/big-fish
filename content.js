@@ -72,7 +72,7 @@ function showPopup(responseX, responseY) {
 
     // Apply the background image
     popup.style.backgroundImage = `url(${chrome.runtime.getURL("popup_bg.png")})`;
-    popup.style.backgroundSize = "contain"; 
+    popup.style.backgroundSize = "cover"; 
     popup.style.backgroundPosition = "center";
     popup.style.backgroundRepeat = "no-repeat";
     popup.style.display = "flex";
