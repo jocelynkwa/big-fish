@@ -1,16 +1,4 @@
 document.addEventListener("DOMContentLoaded", function () {
-    // Resize the popup dynamically
-    chrome.runtime.getPlatformInfo(function (info) {
-        if (info.os === "mac") {
-            document.body.style.width = "400px";
-            document.body.style.height = "600px";
-        } else {
-            document.body.style.width = "450px";
-            document.body.style.height = "650px";
-        }
-    });
-
-    // Load the stored data
     chrome.storage.local.get(["triggerData"], (result) => {
         let triggerData = result.triggerData || {};
         generateGraph(triggerData);
@@ -21,21 +9,24 @@ function generateGraph(data) {
     const graph = document.getElementById("commit-graph");
     const today = new Date();
     
-    for (let i = 29; i >= 0; i--) {
-        const date = new Date(today);
-        date.setDate(today.getDate() - i);
-        const dateKey = date.toISOString().split('T')[0];
+    // Set up a 7-column, 5-row grid (last 35 days)
+    for (let row = 0; row < 5; row++) {
+        for (let col = 0; col < 7; col++) {
+            const date = new Date(today);
+            date.setDate(today.getDate() - ((row * 7) + col)); // Move back in time
+            const dateKey = date.toISOString().split('T')[0];
 
-        const dayData = data[dateKey] || { totalConfidence: 0, count: 0 };
-        const avgConfidence = dayData.count > 0 ? (dayData.totalConfidence / dayData.count) : 0;
-        const color = getCommitColor(avgConfidence);
+            const dayData = data[dateKey] || { totalConfidence: 0, count: 0 };
+            const avgConfidence = dayData.count > 0 ? (dayData.totalConfidence / dayData.count) : 0;
+            const color = getCommitColor(avgConfidence);
 
-        const day = document.createElement("div");
-        day.classList.add("day");
-        day.style.backgroundColor = color;
-        day.title = `${dateKey}: Avg Confidence Level: ${avgConfidence.toFixed(1)}`;
+            const day = document.createElement("div");
+            day.classList.add("day");
+            day.style.backgroundColor = color;
+            day.title = `${dateKey}: Avg Confidence Level: ${avgConfidence.toFixed(1)}`;
 
-        graph.appendChild(day);
+            graph.appendChild(day);
+        }
     }
 }
 

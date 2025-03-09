@@ -27,22 +27,24 @@
 
         #commit-graph {
             display: grid;
-            grid-template-columns: repeat(30, 10px);
-            gap: 2px;
+            grid-template-columns: repeat(7, 15px); /* 7 columns for days of the week */
+            grid-template-rows: repeat(5, 15px); /* 5 rows for 5 weeks */
+            gap: 4px;
             justify-content: center;
-            margin-top: 20px;
+            margin-top: 180px; /* Increased to move it lower */
         }
 
         .day {
-            width: 10px;
-            height: 10px;
-            border-radius: 2px;
+            width: 15px;
+            height: 15px;
+            border-radius: 3px;
             background-color: #ebedf0; /* Default (no triggers) */
         }
     </style>
 </head>
 <body>
-    <padding> 
+    <h2> </h2>
+    <p> </p>
     <div id="commit-graph"></div>
 </body>
 </html>
