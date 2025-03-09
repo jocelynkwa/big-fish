@@ -1,0 +1,35 @@
+{
+    "manifest_version": 3,
+    "name": "Impostor Syndrome Detector",
+    "version": "1.0",
+    "description": "Detects impostor syndrome phrases in Gmail and provides encouragement.",
+    
+    "permissions": ["storage", "activeTab"], 
+    "host_permissions": [
+        "https://mail.google.com/", 
+        "https://generativelanguage.googleapis.com/"
+    ],
+
+    "background": {
+        "service_worker": "background.js"
+    },
+
+    "action": {
+        "default_popup": "popup.html",
+        "default_icon": "icon.png"
+    },
+
+    "content_scripts": [
+        {
+            "matches": ["https://mail.google.com/*"],
+            "js": ["content.js"]
+        }
+    ],
+
+    "web_accessible_resources": [
+     {
+         "resources": ["x_character.png", "y_character.png", "popup_bg.png"],
+         "matches": ["<all_urls>"]
+     }
+ ]
+}

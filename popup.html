@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Impostor Syndrome Tracker</title>
+    <script src="popup.js" defer></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            width: 350px;
+            padding: 10px;
+        }
+        #commit-graph {
+            display: grid;
+            grid-template-columns: repeat(30, 10px);
+            gap: 2px;
+            justify-content: center;
+            margin-top: 10px;
+        }
+        .day {
+            width: 10px;
+            height: 10px;
+            border-radius: 2px;
+            background-color: #ebedf0; /* Default (no triggers) */
+        }
+    </style>
+</head>
+<body>
+    <h2>Impostor Syndrome Tracker</h2>
+    <p>Each box represents a day. More green = more confidence!</p>
+    <div id="commit-graph"></div>
+</body>
+</html>
