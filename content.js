@@ -60,14 +60,14 @@ function showPopup(responseX, responseY) {
     popup.style.position = "fixed";
     popup.style.bottom = "50px";
     popup.style.right = "50px";
-    popup.style.width = "250px";  // Keeps the popup compact
-    popup.style.height = "350px"; // Proper vertical fit
+    popup.style.width = "250px";  
+    popup.style.height = "350px"; 
     popup.style.backgroundColor = "white";
-    popup.style.border = "none"; // No black border
-    popup.style.borderRadius = "20px"; // Softer, rounded edges
-    popup.style.boxShadow = "4px 4px 12px rgba(0, 0, 0, 0.1)"; // Soft shadow for depth
+    popup.style.border = "none"; 
+    popup.style.borderRadius = "20px"; 
+    popup.style.boxShadow = "4px 4px 12px rgba(0, 0, 0, 0.1)"; 
     popup.style.padding = "20px";
-    popup.style.fontFamily = "'Poppins', 'Quicksand', sans-serif"; // Cuter and modern font
+    popup.style.fontFamily = "'Hubballi', cursive";  // Changed font to Hubballi
     popup.style.zIndex = "10000";
 
     // Apply the background image
@@ -104,7 +104,7 @@ function showPopup(responseX, responseY) {
     xText.innerText = responseX;
     xText.style.color = "#0077cc";
     xText.style.fontWeight = "bold";
-    xText.style.fontSize = "14px";
+    xText.style.fontSize = "16px"; 
     xText.style.margin = "0";
 
     xContainer.appendChild(xImg);
@@ -125,7 +125,7 @@ function showPopup(responseX, responseY) {
     yText.innerText = responseY;
     yText.style.color = "#cc3366";
     yText.style.fontWeight = "bold";
-    yText.style.fontSize = "14px";
+    yText.style.fontSize = "16px"; 
     yText.style.margin = "0";
 
     yContainer.appendChild(yImg);
